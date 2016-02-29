@@ -32,7 +32,7 @@
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="js/index.js"></script>
 
-        <title>Logind</title>
+        <title>Login</title>
     </head>
     <body>
         <div class="container">    
@@ -45,23 +45,26 @@
 
                     <div class="panel-body" >
 
-                        <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                        <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST" action="admin/indexAdmin.html">
                            
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="user" type="text" class="form-control" name="user" value="" placeholder="Usuario">                                        
+                                <input id="user" type="text" class="form-control" name="user" value="" placeholder="Usuario" required="true">                                        
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="password" type="password" class="form-control" name="password" placeholder="Contraseña">
+                                <input id="password" type="password" class="form-control" name="password" placeholder="Contraseña" required="true">
                             </div>                                                                  
 
                             <div class="form-group">
                                 <!-- Button -->
                                 <div class="col-sm-12 controls menu_botones">
-                                    <button type="submit" href="#" class="btn btn-primary"><i class="glyphicon glyphicon-log-in"></i> Iniciar Sesión</button>                          
+                                    <button type="submit"  class="btn btn-primary"><i class="glyphicon glyphicon-log-in"></i> Iniciar Sesión</button>
+                                    <br><br>
+                                    <a href="#" id="olvido_contra">¿Has olvidado tu cotraseña?</a>                     
                                 </div>
+
                             </div>
 
                         </form>     
