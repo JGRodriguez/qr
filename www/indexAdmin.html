@@ -11,6 +11,7 @@
         <link href="css/pages.css" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/pages.js"></script>
         <title>AdminIndex</title>
     </head>
     <body>
@@ -18,14 +19,14 @@
             <div data-role="content">
                 <ul data-role="listview" data-inset="true" class="noshadow">
                     <li data-icon="false">
-                        <a href="#">
+                        <a href="#myPage1">
                             <img class="imgList" src="img/route.png">
                             <h2>RUTAS</h2>
                             <p>Gestiona rutas</p>
                         </a>
                     </li>
                     <li data-icon="false">
-                        <a href="#">
+                        <a href="#conductores">
                             <img class="imgList" src="img/driver.png">
                             <h2>CONDUCTORES</h2>
                             <p>Gestiona conductores</p>
@@ -42,6 +43,129 @@
                 
             </div>
           </div>
-        
+
+        <div data-role="page" id="conductores" class="pagina">
+            <div data-role="header" data-position="fixed" class="header">
+                <form>
+                    <div class="ui-block-a" style="width: 77%; padding-left:15px">
+                        <input data-type="search" id="filtroLista" class="filtro" placeholder="Buscar conductores...">
+                    </div>
+                    <div class="ui-block-b" style="width: 20%;">
+                    <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="c" >Agregar</a>
+                </div>
+                </form>
+
+
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-autodividers="true" id="lista" data-filter="true" data-input="#filtroLista">
+                    <li>
+                        <div class="ui-grid-b" >
+                            <div class="ui-block-a" style="width: 20%;">
+                                <img class="imgList" src="http://a4.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTI2NTgyMzIxOTcyMjU5NDU5.jpg" height="50" width"50">
+                            </div>
+                            <div class="ui-block-b" style="width: 65%;">
+                                <div data-role="fieldcontain">
+                                        <h2>Ludwig Van Beethoven</h2>
+                                        <p><b>Id:2343241</b></p>
+                                        <p><b>Edad: 246 años</b></p>
+                                </div>
+                            </div>
+                            <div class="ui-block-c" style="width: 6%;  float: right;">
+                     
+                                <div style="float: right;">
+                                   <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Configurar</a><br>
+                                   <a href="#" data-role="button" data-icon="forbidden" data-iconpos="notext" data-theme="c" data-inline="true">Eliminar</a>
+                                </div>
+                            </div>    
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ui-grid-b" >
+                            <div class="ui-block-a" style="width: 20%;">
+                                <img class="imgList" src="http://a4.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTI2NTgyMzIxOTcyMjU5NDU5.jpg" height="50" width"50">
+                            </div>
+                            <div class="ui-block-b" style="width: 65%;">
+                                <div data-role="fieldcontain">
+                                        <h2>Ludwig Van Beethoven</h2>
+                                        <p><b>Id:2343241</b></p>
+                                        <p><b>Edad: 246 años</b></p>
+                                </div>
+                            </div>
+                            <div class="ui-block-c" style="width: 6%;  float: right;">
+                     
+                                <div style="float: right;">
+                                   <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Configurar</a><br>
+                                   <a href="#" data-role="button" data-icon="forbidden" data-iconpos="notext" data-theme="c" data-inline="true">Eliminar</a>
+                                </div>
+                            </div>    
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ui-grid-b" >
+                            <div class="ui-block-a" style="width: 20%;">
+                                <img class="imgList" src="http://kidsmusiccorner.co.uk/wp-content/uploads/2010/01/Mozart.jpg" height="50" width"50">
+                            </div>
+                            <div class="ui-block-b" style="width: 65%;">
+                                <div data-role="fieldcontain">
+                                        <h2>Wolfgang Amadeus Mozart</h2>
+                                        <p><b>Id:123288645</b></p>
+                                        <p><b>Edad: 256 años</b></p>
+                                </div>
+                            </div>
+                            <div class="ui-block-c" style="width: 6%;  float: right;">
+                     
+                                <div style="float: right;">
+                                   <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Configurar</a><br>
+                                   <a href="#" data-role="button" data-icon="forbidden" data-iconpos="notext" data-theme="c" data-inline="true">Eliminar</a>
+                                </div>
+                            </div>    
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ui-grid-b" >
+                            <div class="ui-block-a" style="width: 20%;">
+                                <img class="imgList" src="http://kidsmusiccorner.co.uk/wp-content/uploads/2010/01/Mozart.jpg" height="50" width"50">
+                            </div>
+                            <div class="ui-block-b" style="width: 65%;">
+                                <div data-role="fieldcontain">
+                                        <h2>Wolfgang Amadeus Mozart</h2>
+                                        <p><b>Id:123288645</b></p>
+                                        <p><b>Edad: 256 años</b></p>
+                                </div>
+                            </div>
+                            <div class="ui-block-c" style="width: 6%;  float: right;">
+                     
+                                <div style="float: right;">
+                                   <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Configurar</a><br>
+                                   <a href="#" data-role="button" data-icon="forbidden" data-iconpos="notext" data-theme="c" data-inline="true">Eliminar</a>
+                                </div>
+                            </div>    
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ui-grid-b" >
+                            <div class="ui-block-a" style="width: 20%;">
+                                <img class="imgList" src="http://kidsmusiccorner.co.uk/wp-content/uploads/2010/01/Mozart.jpg" height="50" width"50">
+                            </div>
+                            <div class="ui-block-b" style="width: 65%;">
+                                <div data-role="fieldcontain">
+                                        <h2>Wolfgang Amadeus Mozart</h2>
+                                        <p><b>Id:123288645</b></p>
+                                        <p><b>Edad: 256 años</b></p>
+                                </div>
+                            </div>
+                            <div class="ui-block-c" style="width: 6%;  float: right;">
+                     
+                                <div style="float: right;">
+                                   <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Configurar</a><br>
+                                   <a href="#" data-role="button" data-icon="forbidden" data-iconpos="notext" data-theme="c" data-inline="true">Eliminar</a>
+                                </div>
+                            </div>    
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </body>
 </html>

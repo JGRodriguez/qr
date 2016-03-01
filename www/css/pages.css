@@ -1,24 +1,29 @@
-          .pagina {
-                background-color: #DAE0C5;
-            }
+  	.pagina {
+        background-color: #DAE0C5;
+    }
 
-			.noshadow {
-			    -moz-box-shadow: none !important;
-			    -webkit-box-shadow: none !important;
-			    box-shadow: none !important;
-			}
+	.noshadow {
+	    -moz-box-shadow: none !important;
+	    -webkit-box-shadow: none !important;
+	    box-shadow: none !important;
+	}
 
-			.col_img{
-				text-align: center;
-			}
+	.col_img{
+		text-align: center;
+	}
 
-			.imgList{
-				margin-top: 1em;
-			}
+	.imgList{
+		margin-top: 1em;
+	}
 
-			li{
-				background: #BAC594;
-			}
-			a{
-				background: #F6F6F6 !important;
-			}
+	li{
+		background: #BAC594;
+	}
+	a{
+		background: #F6F6F6 !important;
+	}
+	.header{
+		background-color: #DAE0C5 !important;
+		text-align: center;
+	}
+
