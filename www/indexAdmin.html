@@ -12,6 +12,67 @@
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/pages.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value 
+
+    // Wait for Cordova to connect with the device
+    document.addEventListener("deviceready",onDeviceReady,false);
+    // Cordova is ready to be used!
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+    }
+    // Called when a photo is successfully retrieved
+    function onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64 encoded image data
+      // console.log(imageData);
+      // Get image handle
+      var smallImage = document.getElementById('smallImage');
+      // Unhide image elements
+      smallImage.style.display = 'block';
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+    }
+    // Called when a photo is successfully retrieved
+    function onPhotoURISuccess(imageURI) {
+      // Uncomment to view the image file URI 
+      // console.log(imageURI);
+      // Get image handle
+      var largeImage = document.getElementById('largeImage');
+      // Unhide image elements
+      largeImage.style.display = 'block';
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      largeImage.src = imageURI;
+    }
+    // A button will call this function
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        destinationType: destinationType.DATA_URL });
+    }
+    // A button will call this function
+    function capturePhotoEdit() {
+      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+        destinationType: destinationType.DATA_URL });
+    }
+    // A button will call this function
+    function getPhoto(source) {
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+    // Called if something bad happens. 
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
+    </script>
         <title>AdminIndex</title>
     </head>
     <body>
@@ -33,7 +94,7 @@
                         </a>
                     </li>
                     <li data-icon="false">
-                        <a href="#">
+                        <a href="#Buses" data-transitiion"turn">
                             <img class="imgList" src="img/bus.png">
                             <h2>BUSES</h2>
                             <p>Gestiona buses</p>
@@ -51,7 +112,7 @@
                         <input data-type="search" id="filtroLista" class="filtro" placeholder="Buscar conductores...">
                     </div>
                     <div class="ui-block-b" style="width: 20%;">
-                    <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="c" >Agregar</a>
+                    <a href="#agregarConductor" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="c" >Agregar</a>
                 </div>
                 </form>
 
@@ -167,5 +228,118 @@
                 </ul>
             </div>
         </div>
+
+        <div data-role="page" id="agregarConductor" class="pagina">
+            <div data-role="header" data-position="fixed" class="header">
+                    <div class="titulo">Agregar nuevo conductor</div>
+            </div>
+
+            <div data-role="content">
+                <div class="agregarConductor">
+                    <form >
+                        <h3>Nombres: </h3>
+                        <input type="text" name="nombres" id="nombres" required>
+                        <h3>Apellidos: </h3>
+                        <input type="text" name="apellidos" id="apellidos" required>
+                        <h3>Fecha de nacimiento: </h3>
+                        <input type="date" name="fechaNacimiento" id="fechaNacimiento" required>
+                        <h3>Foto: </h3>
+                        <button onclick="capturePhoto();">Tomar Foto</button> 
+                        <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Foto desde galería</button><br>
+                        <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+
+                        <br>
+                        <div class="ui-block-a" style="width: 50%;">
+                            <a href="#conductores" data-role="button" data-icon="arrow-l" data-theme="c" >Volver</a>
+                        </div>
+                        <div class="ui-block-b" style="width: 50%;">
+                            <input type="submit" 
+                                 onclick="return validar();" value="Agregar">
+                                <script type="text/javascript">
+                                    var validar = function(){
+                                        if ($("#nombres").val() != "" && $("#apellidos").val() != "" && $("#fechaNacimiento").val() != ""){
+                                                alert('Conductor agregado satisfactoriamente');
+                                                window.history.back();
+                                                    var nombres= document.getElementById('nombres');
+                                                    nombres.value= nombres.defaultValue;
+                                                    var apellidos= document.getElementById('apellidos');
+                                                    apellidos.value= apellidos.defaultValue;
+                                                    var fechaNacimiento= document.getElementById('fechaNacimiento');
+                                                    fechaNacimiento.value= fechaNacimiento.defaultValue;
+                                                submit();
+                                                return true;
+                                              }else{
+                                                alert('Se deben ingresar todos los espacios'); 
+                                                return false;
+                                              }
+                                    }
+                                </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="Buses" class="pagina">
+            <div data-role="header" data-position="fixed" class="header">
+                <form>
+                    <div class="ui-block-a" style="width: 77%; padding-left:15px">
+                        <input data-type="search" id="filtroListaB" class="filtro" placeholder="Buscar Buses...">
+                    </div>
+                </form>
+            </div>
+                        <div data-role="content">
+                <ul data-role="listview" data-autodividers="true" id="lista" data-filter="true" data-input="#filtroListaB">
+                    <li>
+                        <div class="ui-grid-b" >
+                            <div class="ui-block-a" style="width: 20%;">
+                                <img class="imgList" src="img/bus_dispo.png" height="50" width"50">
+                            </div>
+                            <div class="ui-block-b" style="width: 65%;">
+                                <div data-role="fieldcontain">
+                                        <h2>Ludwig Van Beethoven</h2>
+                                        <p><b>Id:667678</b></p>
+                                        <p><b>Capacidad: 80 pasajeros</b></p>
+                                </div>
+                            </div>
+                            <div class="ui-block-c" style="width: 6%;  float: right;">
+                            </div>    
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ui-grid-b" >
+                            <div class="ui-block-a" style="width: 20%;">
+                                <img class="imgList" src="img/bus_mediolleno.png" height="50" width"50">
+                            </div>
+                            <div class="ui-block-b" style="width: 65%;">
+                                <div data-role="fieldcontain">
+                                        <h2>Wolfgang Amadeus Mozart</h2>
+                                        <p><b>Id:96496249</b></p>
+                                        <p><b>Capacidad: 90 pasajeros</b></p>
+                                </div>
+                            </div>  
+                        </div>
+                    </li>
+                     <li>
+                        <div class="ui-grid-b" >
+                            <div class="ui-block-a" style="width: 20%;">
+                                <img class="imgList" src="img/bus_lleno.png" height="50" width"50">
+                            </div>
+                            <div class="ui-block-b" style="width: 65%;">
+                                <div data-role="fieldcontain">
+                                        <h2>Pepo "Driver" Guzmán</h2>
+                                        <p><b>Id:324324235</b></p>
+                                        <p><b>Capacidad: 50 pasajeros</b></p>
+                                </div>
+                            </div>
+                            <div class="ui-block-c" style="width: 6%;  float: right;">
+                            </div>    
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+
     </body>
 </html>
