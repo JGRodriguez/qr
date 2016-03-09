@@ -57,7 +57,7 @@
                 var trackId = navigator.geolocation.watchPosition(successCallback, null, {maximumAge:1000, timeout:60000, enableHighAccuracy:true});
 
                 function successCallback(position){
-                        map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                        // map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 
 
                         bus.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));

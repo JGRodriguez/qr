@@ -8,6 +8,7 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link href="css/map.css" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        
 
         <script src="js/map.js"></script>
          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFpWsSf1u89E02YmnnH8VFg7hNHZnth2c&sensor=false">
@@ -57,7 +58,7 @@
                 var trackId = navigator.geolocation.watchPosition(successCallback, null, {maximumAge:1000, timeout:60000, enableHighAccuracy:true});
 
                 function successCallback(position){
-                        map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                         // map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 
 
                         pasajero.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
@@ -73,6 +74,8 @@
                 setInterval(startTracking, 1000);
                             
             </script>
+
+        <script type="text/javascript" src="cordova.js"></script>
           
         <title>Conductor</title>
 
