@@ -36,9 +36,10 @@
                         map:map 
                         });
     		        google.maps.event.addListener(overlay,'status_changed',function(){document.getElementById('status').innerHTML = overlay.getStatus();});
+                    var icon_bus = 'img/bus_marker.png';
                     bus = new google.maps.Marker({
                             position:  new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-
+                            icon: icon_bus,
                             map: map,
                             title: 'Conductor'
 
