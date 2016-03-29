@@ -293,7 +293,7 @@
                             <h3>Destino: </h3>
                             <input type="text" name="destino" id="destino" required>
                             <h3>Paradas: </h3>
-                            <center><p>Presiona una vez sobre un lugar para agregarlo como una parada, presiona dos veces sobre el mismo para eliminarlo.</p><center>
+                            <center><p>Presiona una vez sobre un lugar para agregarlo como una parada, presiona sobre una parada para eliminarla.</p><center>
                                  <script>
             var map;var pasajero;
             var arrayMarcadores = [];
@@ -315,9 +315,6 @@
                         // fullscreenControlOptions:true
                      }
                     map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
-                    // google.maps.event.addListener(map, 'dblclick', function(event) {
-                    //    quitarParada(event.latLng);
-                    // });
                    google.maps.event.addListener(map, 'click', function(event) {
                        agregarParada(event.latLng);
                     });           
@@ -328,22 +325,28 @@
                 alert(error.message);
             }
             function agregarParada(location) {
-                        marcadorTemp = new google.maps.Marker({
-                            position: location, 
-                            map: map
-                        });
-                        arrayMarcadores.push(marcadorTemp);
+                var marcadorTemp = new google.maps.Marker({
+                    position: location, 
+                    map: map,
+                    animation: google.maps.Animation.DROP
+                });
+                arrayMarcadores.push(marcadorTemp);
+                var tam=arrayMarcadores.length;
+                // for(var i=0;i<tam;i++){
+                //          console.log(i+"..."+ arrayMarcadores[i].getPosition().lat()+" "+arrayMarcadores[i].getPosition().lng());
+                // }
+
+                google.maps.event.addListener(marcadorTemp, "click", function (point) { 
+                    var index = arrayMarcadores.indexOf(marcadorTemp);
+                    console.log("DELETING");
+                    console.log(marcadorTemp.getPosition().lat()+" "+marcadorTemp.getPosition().lng());
+                    console.log(arrayMarcadores[index].getPosition().lat()+" "+arrayMarcadores[index].getPosition().lng());
+                    arrayMarcadores.splice(index,1);
+                    marcadorTemp.setMap(null);
+                });
 
             }
-            // function quitarParada(location){
-            //     var tam=arrayMarcadores.length;
-            //     for(var i=0;i<tam;i++){
-            //         if(location==arrayMarcadores[i].location){
-            //             arrayMarcadores[i].setMap(null);
-            //             console.log("salio");
-            //         }
-            //     }
-            // }   
+
             onDeviceReady();
   
                             
