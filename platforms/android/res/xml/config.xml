@@ -18,6 +18,9 @@
     <feature name="Capture">
         <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
     </feature>
+    <feature name="BarcodeScanner">
+        <param name="android-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner" />
+    </feature>
     <allow-intent href="market:*" />
     <name>BosqueTravelPG</name>
     <description>Hello World sample application that responds to the deviceready event.</description>
