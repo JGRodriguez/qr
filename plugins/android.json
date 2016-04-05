@@ -18,6 +18,9 @@
         },
         "cordova-plugin-media-capture": {
             "PACKAGE_NAME": "com.unbosque.bosquetravelpg"
+        },
+        "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "com.unbosque.bosquetravelpg"
         }
     },
     "dependent_plugins": {
