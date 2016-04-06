@@ -6,30 +6,25 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <link href="css/pages.css" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="js/loader.js"></script>
-        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/pages.js"></script>
         <script src="js/camera.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFpWsSf1u89E02YmnnH8VFg7hNHZnth2c&sensor=false"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
        
     <script type="text/javascript" charset="utf-8">
-    function validarFormulario(){
-
-        if ($("#nombres").val() != "" && $("#apellidos").val() != "" && $("#fechaNacimiento").val() != ""){
-            alert("Conductor agregado satisfactoriamente");
-            $("#nombres").val("");
-            $("#apellidos").val("");
-            $("#fechaNacimiento").val("");
-            return true;
-          }else{
-            alert('Se deben ingresar todos los espacios'); 
-            return false;
-          }
+    function getUrlVars() {
+        var vars = {};
+        var parts = decodeURIComponent(window.location.href).replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+        function(m,key,value) {
+          vars[key] = value;
+        });
+        return vars;
     }
+    var serverURL=getUrlVars()["url"];
     function validarFormularioBus(){
 
         if ($("#placa").val() != "" && $("#capacidad").val() != "" && $("#color").val() != ""){
@@ -97,28 +92,7 @@
 
             </div>
             <div data-role="content">
-                <ul data-role="listview" data-autodividers="true" id="listaConductores" data-filter="true" data-input="#filtroListaConductores">
-                    <li>
-                        <div class="ui-grid-b" >
-                            <div class="ui-block-a" style="width: 20%;">
-                                <img class="imgList" src="http://a4.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTI2NTgyMzIxOTcyMjU5NDU5.jpg" height="50" width"50">
-                            </div>
-                            <div class="ui-block-b" style="width: 65%;">
-                                <div data-role="fieldcontain">
-                                        <h2>Ludwig Van Beethoven</h2>
-                                        <p><b>Id:2343241</b></p>
-                                        <p><b>Edad: 246 años</b></p>
-                                </div>
-                            </div>
-                            <div class="ui-block-c" style="width: 6%;  float: right;">
-                     
-                                <div style="float: right;">
-                                   <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Configurar</a><br>
-                                   <a href="#" data-role="button" data-icon="forbidden" data-iconpos="notext" data-theme="c" data-inline="true">Eliminar</a>
-                                </div>
-                            </div>    
-                        </div>
-                    </li>
+                <ul data-role="listview" data-autodividers="true" data-sort="true" id="listaConductores" data-filter="true" data-input="#filtroListaConductores">
                 </ul>
             </div>
         </div>
@@ -131,7 +105,7 @@
 
             <div data-role="content">
                 <div class="agregarConductor">
-                        <form method="post" action="http://172.16.14.21/BosqueTravel/public/API/drivers">
+                        <form id="formConductores" method="post">
                             <h3>Usuario: </h3>
                             <input type="text" name="userName" id="userName" required>
                             <h3>Contraseña: </h3>
@@ -141,7 +115,7 @@
                             <h3>Apellidos: </h3>
                             <input type="text" name="lastName" id="lastName" required>
                             <h3>Fecha de nacimiento: </h3>
-                            <input type="date" name="fechaNacimiento" id="fechaNacimiento" required>
+                            <input type="date" name="birthDate" id="birthDate" required>
                             <h3>Foto: </h3>
                             <button type="button" onclick="capturePhoto();">Tomar Foto</button> 
                             <button type="button" onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Foto desde galería</button><br>
@@ -151,7 +125,7 @@
                                 <a href="#conductores" data-role="button" data-icon="arrow-l" data-theme="c" >Volver</a>
                             </div>
                             <div class="ui-block-b" style="width: 50%;">
-                                <input type="submit" value="Agregar">
+                                <input type="submit" id="btnAgrConductor" value="Agregar">
                                     
                             </div>
                         </form>
@@ -160,7 +134,7 @@
         </div>
 
         <div data-role="page" id="buses" class="pagina">
-            <div data-role="header" data-position="fixed" class="header">
+            <div data-role="header" data-position="fixed" class="header" >
                 <form>
                     <div id="upbar" style="margin:0; height:20px; width:100%; background-color:#FFFFFF; float:left"></div>
                     <div class="ui-block-a" style="width: 77%; padding-left:15px">
@@ -174,22 +148,7 @@
             </div>
             <div data-role="content">
                 <ul data-role="listview" data-autodividers="true" id="listaBuses" data-filter="true" data-input="#filtroListaBuses">
-                    <li>
-                        <div class="ui-grid-b" >
-                            <div class="ui-block-a" style="width: 20%;">
-                                <img class="imgList" src="img/bus_dispo.png" height="50" width"50">
-                            </div>
-                            <div class="ui-block-b" style="width: 65%;">
-                                <div data-role="fieldcontain">
-                                        <h2>Ludwig Van Beethoven</h2>
-                                        <p><b>Id:667678</b></p>
-                                        <p><b>Capacidad: 80 pasajeros</b></p>
-                                </div>
-                            </div>
-                            <div class="ui-block-c" style="width: 6%;  float: right;">
-                            </div>    
-                        </div>
-                    </li>
+                 
                 </ul>
             </div>
 
@@ -294,64 +253,65 @@
                             <h3>Destino: </h3>
                             <input type="text" name="destino" id="destino" required>
                             <h3>Paradas: </h3>
-                            <center><p>Presiona una vez sobre un lugar para agregarlo como una parada, presiona sobre una parada para eliminarla.</p><center>
-                                 <script>
-            var map;var pasajero;
-            var arrayMarcadores = [];
-            var marcadorTemp;
-            function onDeviceReady(){
+                            <center><p>Presiona una vez sobre un lugar para agregarlo como una parada, presiona sobre una parada para eliminarla.</p>
+                            </center>
+                             <script>
+                                        var map;var pasajero;
+                                        var arrayMarcadores = [];
+                                        var marcadorTemp;
+                                        function onDeviceReady(){
 
-                    navigator.geolocation.getCurrentPosition(this.onSuccess, this.onError);
-            };
-            function onSuccess(position){
-                var $map_canvas = $( "#googleMap" );
-                    $map_canvas.css({"width": "100%", "height": $( window ).height()*0.5});
-                    var mapOptions = {
-                        center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
-                        zoom:13,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP,
-                        mapTypeControl:false,
-                        streetViewControl:false,
-                        // fullscreenControl:true,
-                        // fullscreenControlOptions:true
-                     }
-                    map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
-                   google.maps.event.addListener(map, 'click', function(event) {
-                       agregarParada(event.latLng);
-                    });           
+                                                navigator.geolocation.getCurrentPosition(this.onSuccess, this.onError);
+                                        };
+                                        function onSuccess(position){
+                                            var $map_canvas = $( "#googleMap" );
+                                                $map_canvas.css({"width": "100%", "height": $( window ).height()*0.5});
+                                                var mapOptions = {
+                                                    center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+                                                    zoom:13,
+                                                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                                    mapTypeControl:false,
+                                                    streetViewControl:false,
+                                                    // fullscreenControl:true,
+                                                    // fullscreenControlOptions:true
+                                                 }
+                                                map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+                                               google.maps.event.addListener(map, 'click', function(event) {
+                                                   agregarParada(event.latLng);
+                                                });           
 
-            }
+                                        }
 
-            function onError(error){
-                alert(error.message);
-            }
-            function agregarParada(location) {
-                var marcadorTemp = new google.maps.Marker({
-                    position: location, 
-                    map: map,
-                    animation: google.maps.Animation.DROP
-                });
-                arrayMarcadores.push(marcadorTemp);
-                var tam=arrayMarcadores.length;
-                // for(var i=0;i<tam;i++){
-                //          console.log(i+"..."+ arrayMarcadores[i].getPosition().lat()+" "+arrayMarcadores[i].getPosition().lng());
-                // }
+                                        function onError(error){
+                                            alert(error.message);
+                                        }
+                                        function agregarParada(location) {
+                                            var marcadorTemp = new google.maps.Marker({
+                                                position: location, 
+                                                map: map,
+                                                animation: google.maps.Animation.DROP
+                                            });
+                                            arrayMarcadores.push(marcadorTemp);
+                                            var tam=arrayMarcadores.length;
+                                            // for(var i=0;i<tam;i++){
+                                            //          console.log(i+"..."+ arrayMarcadores[i].getPosition().lat()+" "+arrayMarcadores[i].getPosition().lng());
+                                            // }
 
-                google.maps.event.addListener(marcadorTemp, "click", function (point) { 
-                    var index = arrayMarcadores.indexOf(marcadorTemp);
-                    console.log("DELETING");
-                    console.log(marcadorTemp.getPosition().lat()+" "+marcadorTemp.getPosition().lng());
-                    console.log(arrayMarcadores[index].getPosition().lat()+" "+arrayMarcadores[index].getPosition().lng());
-                    arrayMarcadores.splice(index,1);
-                    marcadorTemp.setMap(null);
-                });
+                                            google.maps.event.addListener(marcadorTemp, "click", function (point) { 
+                                                var index = arrayMarcadores.indexOf(marcadorTemp);
+                                                console.log("DELETING");
+                                                console.log(marcadorTemp.getPosition().lat()+" "+marcadorTemp.getPosition().lng());
+                                                console.log(arrayMarcadores[index].getPosition().lat()+" "+arrayMarcadores[index].getPosition().lng());
+                                                arrayMarcadores.splice(index,1);
+                                                marcadorTemp.setMap(null);
+                                            });
 
-            }
+                                        }
 
-            onDeviceReady();
+                                        onDeviceReady();
   
                             
-            </script>
+                            </script>
                             <div id="googleMap" ></div>
                             <div class="ui-block-b" style="width: 50%;">
                                 <input type="submit"  onclick="location.href = 'indexAdmin.html#rutas';" value="Agregar">
