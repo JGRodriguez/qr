@@ -5,14 +5,17 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link href="css/pages.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/jquery-mobile.css" />
         <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery-mobile.js"></script>
         <script src="js/loader.js"></script>
         <script src="js/pages.js"></script>
         <script src="js/camera.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFpWsSf1u89E02YmnnH8VFg7hNHZnth2c&sensor=false"></script>
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        
        
     <script type="text/javascript" charset="utf-8">
     function getUrlVars() {
@@ -50,7 +53,7 @@
             <div data-role="content">
                 <ul data-role="listview" data-inset="true" class="noshadow">
                     <li data-icon="false">
-                        <a href="#rutas">
+                        <a href="#rutas" data-transition="flow">
                             <img class="imgList" src="img/route.png">
                             <h2>RUTAS</h2>
                             <p>Gestiona rutas</p>
@@ -64,7 +67,7 @@
                         </a>
                     </li>
                     <li data-icon="false">
-                        <a href="#buses" data-transitiion"turn">
+                        <a href="#buses" data-transition"flow">
                             <img class="imgList" src="img/bus.png">
                             <h2>BUSES</h2>
                             <p>Gestiona buses</p>
