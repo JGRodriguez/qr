@@ -27,6 +27,7 @@
         return vars;
     }
     var serverURL=getUrlVars()["url"];
+    alert(serverURL);
     function validarFormularioBus(){
 
         if ($("#placa").val() != "" && $("#capacidad").val() != "" && $("#color").val() != ""){
@@ -107,7 +108,7 @@
 
             <div data-role="content">
                 <div class="agregarConductor">
-                        <form id="formConductores" method="post">
+                        <form id="drivers" method="post">
                             <h3>Usuario: </h3>
                             <input type="text" name="userName" id="userName" required>
                             <h3>Contraseña: </h3>

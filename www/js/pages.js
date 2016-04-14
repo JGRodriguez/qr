@@ -11,36 +11,50 @@ $(document).ready(function(){
           }
 
     });
-	$("#formConductores").submit(function(event){
-		
-	 	console.log("submit"+serverURL);
-	    var formObj = $(this);
-	    var formURL = formObj.attr("action");
-	    var formData = new FormData(this);
-	    $.ajax({
-	        url: serverURL+"/drivers",
-	    type: 'POST',
-	        data:  formData,
-	    mimeType:"multipart/form-data",
-	    contentType: false,
-	        cache: false,
-	        processData:false,
-		    success: function(data, textStatus, jqXHR)
-		    {
-		    	alert("Conductor agregado satisfactoriamente!");
-		 		$("#formConductores").attr("action", "indexAdmin.html?url="+serverURL+"#conductores");
-		 		return;
-		    },
-		     error: function(jqXHR, textStatus, errorThrown) 
-		     {
-		     	alert("Hubo un problema de conexión y fue imposible realizar la transacción, intente más tarde");
-		     	$("#formConductores").attr("action", "indexAdmin.html?url="+serverURL+"#conductores");
-		     	event.preventDefault();
-		     	return false;
-		     }          
-		    });
-	    
+/*    $("form").on('submit', function(e){
+        e.preventDefault();
+        var len = $('#username').val().length;
+        if (len < 6 && len > 1) {
+            this.submit();
+        }
+    });*/
+	$("form").submit(function(event){
 
+
+	    var values = $(this).serialize();
+	    $values.each(function() {
+        	 console.log($(this).name()+" "+this.name);
+   		});
+	   
+
+		if(this.id=='drivers'){
+			console.log("submit"+serverURL);
+		    var formObj = $(this);
+		    var formURL = formObj.attr("action");
+		    var formData = new FormData(this);
+		    $.ajax({
+		        url: serverURL+"/drivers",
+				type: 'POST',
+		        data:  formData,
+		    	mimeType:"multipart/form-data",
+		    	contentType: false,
+		        cache: false,
+		        processData:false,
+			    success: function(data, textStatus, jqXHR)
+			    {
+			    	alert("Conductor agregado satisfactoriamente!"+serverURL);
+			    	//window.location.href = "indexAdmin.html?url="+serverURL+"#conductores";
+			    },
+			     error: function(jqXHR, textStatus, errorThrown) 
+			     {
+			     	alert("Hubo un problema de conexión y fue imposible realizar la transacción, intente más tarde");		     	
+			     }          
+			});
+
+		    return false;
+
+		}
+	 	
 	}); 
 
 });
