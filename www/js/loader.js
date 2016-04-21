@@ -70,6 +70,36 @@ $(document).ready(function(){
             console.error("getJSON failed, status: " + textStatus + ", error: "+error)
         });   
 
+   }else if(window.location.href.indexOf('#rutas')>-1){
+        alert("Rutas");
+        lista=$('#listaRutas');
+        itemHTML="<li>"+
+                        "<div class='ui-grid-b'>"+
+                                "<div class='ui-block-b' style='width: 65%;'>"+
+                                    "<div data-role='fieldcontain' class='ui-field-contain'>"+
+                                            "<p><h2>nombreRuta</h2></p>"+
+                                            "<p><b>Origen: origenRuta</b></p>"+
+                                            "<p><b>Destino: destinoRuta</b></p>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='ui-block-c' style='width: 6%;  float: right;'>"+
+                                    "<div style='float: right;'>"+
+                                       "<a href='#' data-role='button' data-icon='gear' data-iconpos='notext' data-theme='c' data-inline='true' class='ui-link ui-btn ui-btn-c ui-icon-gear ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all' role='button'>Configurar</a><br>"+
+                                       "<a href='#' data-role='button' data-icon='forbidden' data-iconpos='notext' data-theme='c' data-inline='true' class='ui-link ui-btn ui-btn-c ui-icon-forbidden ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all' role='button'>Eliminar</a>"+
+                                    "</div>"+
+                                "</div>"+    
+                            "</div>"+
+                      "</li>";
+        $.getJSON("testR.json", function( data ) {
+            console.log(data.length);
+            for(var i=0;i<data.length;i++){
+                lista.append(itemHTML.replace('nombreRuta',data[i].nameRS).replace('origenRuta',+data[i].sourceRS).replace('destinoRuta',data[i].destinationRS));
+            }
+            lista.listview('refresh'); 
+        }).fail( function(d, textStatus, error) {
+            console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+        });   
+
    }
     // else if(window.location.href.indexOf('#buses')>-1){
     //     lista= document.getElementById('listaBuses');
